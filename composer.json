@@ -1,0 +1,10 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Annatar\\": "app/"
+    }
+  },
+  "require": {
+    "predis/predis": "^1.0"
+  }
+}
