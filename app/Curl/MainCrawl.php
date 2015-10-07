@@ -9,6 +9,7 @@
 namespace Annatar\Curl;
 use Annatar\Config\Crawler;
 use Annatar\Factory\Boot;
+use Annatar\Helpers\Helpers;
 
 class MainCrawl
 {

@@ -8,34 +8,20 @@
 
 namespace Annatar\Controllers;
 
-use Annatar\Controllers\ControllersTraits\CheckDataFromRedis;
 use Annatar\Curl\MainCrawl;
 use Annatar\Config\Crawler;
 use Annatar\Factory\Boot;
 
-class UsersGet
+class UsersGet extends Controller
 {
 
-    use CheckDataFromRedis;
 
-    static private $count = 0;
 
-    /**
-     * @var \Predis\Client
-     */
-    protected $redis = null;
-    /**
-     * @var \Annatar\Database\MySQLDatabase
-     */
-    protected $db = null;
     public function __construct() {
-        // 获取redis实例
-        $this->redis = Boot::redis();
 
-        $this->db = Boot::DB();
-        // 从配置文件中获取最大limit并写入到redis中
-        $size = Crawler::getMaxLimit();
-        $this->redis->set('limitSize', $size);
+        parent::init();
+
+
         // 初始化设置并第一次启动
         $this->getUsernames(0);
     }
@@ -55,31 +41,40 @@ class UsersGet
      * 如此往复，直到达成任务
      *
      */
-    function addUsers() {
+    public function addUsers() {
 
-        $endCounts = Crawler::getTimes();
-        $size = $this->redis->get('limitSize');
+        $this->getSize();
 
-
-
-        while(static::$count < $endCounts) {
+        // 从redis拿出数据，并定义url，随后开始爬行逻辑
+        while(static::$count < $this->endCounts) {
             if($this->redis->llen('usernames')) {
                 Crawler::setAddUsersUrl($this->redis->lpop('usernames'));
-                static::runUsersCrawler();
+                $this->runUsersCrawler();
                 static::$count++;
             }else{
-                $this->getUsernames(static::$count * $size);
+                $this->getUsernames(static::$count * $this->size);
             }
         }
-
     }
-    private function runUsersCrawler() {
+
+    /**
+     * 私有方法主爬虫
+     */
+    final private function runUsersCrawler() {
         $crawler = new MainCrawl();
         $crawler->getData();
-        $data = $crawler->analysisUserFollers();
+        $this->dataArray = $crawler->analysisUserFollers();
 
-        $tm = Boot::storeData();
-        $tm->storeUsers('INSERT INTO users(username, createAt) VALUES(?, ?)');
-        $tm->storeUsers($data);
+        $this->store();
+    }
+
+    final private function store() {
+
+        // 爬虫数据的存储
+        $tm = Boot::userStore();
+        // 预处理存储数据
+        $tm->store('INSERT INTO users(username, createAt) VALUES(?, ?)');
+        // 存
+        $tm->store($this->dataArray);
     }
 }

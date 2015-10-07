@@ -11,6 +11,6 @@ class Run
     }
 
     static public function getDetail() {
-        Boot::detailInfoGetController();
+        Boot::detailInfoGetController()->getDetails();
     }
 }

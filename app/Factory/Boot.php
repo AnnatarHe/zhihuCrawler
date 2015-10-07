@@ -7,7 +7,8 @@ use Annatar\Curl\Analysis\UserFollowersAnalysis;
 use Annatar\Curl\AnalysisData;
 use Annatar\Curl\Crawler;
 use Annatar\Database\MySQLDatabase;
-use Annatar\Store\StoreData;
+use Annatar\Store\StoreDetails;
+use Annatar\Store\StoreUsers;
 
 /**
  * Created by PhpStorm.
@@ -70,15 +71,33 @@ class Boot
 
     /**
      * 单例模式
-     * 生成存储数据实例
+     * 生成用户存储数据实例
      *
-     * @return \Annatar\Store\StoreData
+     * @return \Annatar\Store\StoreUsers
      */
-    static public function storeData() {
-        return StoreData::getInstence();
+    static public function userStore() {
+        return StoreUsers::getInstence();
     }
 
+    /**
+     * 生成详细信息存储实例
+     *
+     * @return \Annatar\Store\StoreDetails
+     */
+    static public function detailsStore() {
+        return StoreDetails::getInstence();
+    }
+
+    /**
+     * @var \Predis\Client
+     */
     static protected $redis;
+
+    /**
+     * 单例模式获取Redis连接
+     *
+     * @return \Predis\Client
+     */
     static public function redis() {
         if(empty(static::$redis)){
             static::$redis = new \Predis\Client();
@@ -86,11 +105,22 @@ class Boot
         return static::$redis;
     }
 
+    /**
+     * 获取用户的控制器
+     *
+     * @return UsersGet
+     */
     static public function usersGetController() {
         return new UsersGet();
     }
 
+    /**
+     * 获取用户详细信息的控制器
+     *
+     * @return DetailInfoGet
+     */
     static public function detailInfoGetController() {
+
         return new DetailInfoGet();
     }
 

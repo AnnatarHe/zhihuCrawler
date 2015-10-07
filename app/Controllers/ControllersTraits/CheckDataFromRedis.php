@@ -9,8 +9,6 @@
 namespace Annatar\Controllers\ControllersTraits;
 use Annatar\Helpers\Helpers;
 
-use Annatar\Factory\Boot;
-
 trait CheckDataFromRedis
 {
 
@@ -28,6 +26,7 @@ trait CheckDataFromRedis
         $this->db->ready('SELECT * FROM users WHERE id > ? limit ' . $size);
         $this->db->execute([$count]);
         $result = $this->db->getResult();
+
         $tmp_array = [];
         foreach($result as $v) {
             $tmp_array[] = $v['username'];

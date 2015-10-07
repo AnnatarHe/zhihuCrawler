@@ -11,22 +11,56 @@ namespace Annatar\Controllers;
 use Annatar\Controllers\ControllersTraits\CheckDataFromRedis;
 use Annatar\Curl\MainCrawl;
 use Annatar\Config\Crawler;
+use Annatar\Factory\Boot;
+use Annatar\Helpers\Helpers;
 
-class DetailInfoGet
+class DetailInfoGet extends Controller
 {
 
     use CheckDataFromRedis;
 
-    public function Crawler() {
-        array_map(function($n) {
-            Crawler::setCrawlerUrl($n);
-            static::runCrawler();
-        }, static::$usernames);
+
+
+    public function __construct() {
+
+        parent::init();
+
+        $this->getUsernames(0);
     }
 
-    function runCrawler() {
+    public function getDetails() {
+
+        $this->getSize();
+
+        // 从redis拿出数据，并定义url，随后开始爬行逻辑
+        while(static::$count < $this->endCounts) {
+            if($this->redis->llen('usernames')) {
+                Crawler::setCrawlerUrl($this->redis->lpop('usernames'));
+                $this->runGetDetailsCrawler();
+                static::$count++;
+            }else{
+                $this->getUsernames(static::$count * $this->size);
+            }
+        }
+    }
+
+    function runGetDetailsCrawler() {
         $crawler = new MainCrawl();
         $crawler->getData();
-        var_dump($crawler->analysisCrawler());
+        $this->dataArray = $crawler->analysisCrawler();
+
+        $this->store();
+    }
+
+    final private function store() {
+
+        // 爬虫数据的存储
+        $tm = Boot::detailsStore();
+
+        // 预处理存储数据
+        $tm->store('INSERT INTO informations(username, nickname, bio, location, business, gender, education, education_extra, content, agrees, thanks, blue_stars, following, followers) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        // 存
+        $tm->store($this->dataArray);
+
     }
 }

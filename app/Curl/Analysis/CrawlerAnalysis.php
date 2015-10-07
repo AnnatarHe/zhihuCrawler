@@ -8,7 +8,7 @@
 
 namespace Annatar\Curl\Analysis;
 use Annatar\TheInterfaces\AnalysisInterface;
-
+use Annatar\Curl\CrawlerTraits\CrawlerRegexs;
 class CrawlerAnalysis implements AnalysisInterface
 {
     // 调用正则

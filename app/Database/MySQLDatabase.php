@@ -7,6 +7,7 @@
  */
 
 namespace Annatar\Database;
+use Annatar\Helpers\Helpers;
 use Annatar\TheInterfaces\DatabaseInterface;
 use Annatar\Config\DBConfig;
 class MySQLDatabase implements DatabaseInterface
@@ -62,7 +63,12 @@ class MySQLDatabase implements DatabaseInterface
      * @param $query
      */
     public function ready($query) {
-        $this->readied = $this->instance->prepare($query);
+        try{
+            $this->readied = $this->instance->prepare($query);
+        }catch (\PDOException $e) {
+            throw new \PDOException($e->errorInfo);
+        }
+
     }
 
     /**
@@ -73,6 +79,7 @@ class MySQLDatabase implements DatabaseInterface
      */
     public function execute($params) {
 
+        Helpers::dd($params);
         $success = $this->readied->execute($params);
         if($success) {
             return $this;
