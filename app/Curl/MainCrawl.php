@@ -45,9 +45,11 @@ class MainCrawl
      */
     public function getData() {
 
+
         $this->crawler->setSettings();
         $this->crawler->execute();
         $this->data = $this->crawler->getResult();
+
     }
 
     /**

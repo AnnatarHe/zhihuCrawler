@@ -28,12 +28,30 @@ class StoreDetails extends Store
         }
     }
 
+    public function bind(array $data, array $type) {
+        $i = 1;
+        foreach ($data as $val) {
+            $this->db->bind($i, $val, $type[$i - 1]);
+            $i++;
+        }
+    }
+
     /**
      * 存储
+     *
+     * 这一段我非常的不明白，为什么关联数组被传过去。
+     *
+     * 用foreach把数据插入到临时变量里面，然后传过去
+     *
      * @param array $param
      */
     protected function save(array $params) {
 
-        $this->db->execute($params);
+        // 临时数组
+        $tmp = [];
+        foreach ($params as $v) {
+            array_push($tmp, $v);
+        }
+        $this->db->execute($tmp);
     }
 }

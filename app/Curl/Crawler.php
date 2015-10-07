@@ -1,5 +1,6 @@
 <?php
 namespace Annatar\Curl;
+use Annatar\Helpers\Helpers;
 use Annatar\Curl\CrawlerTraits\CrawlerTrait;
 /**
  * Created by PhpStorm.
@@ -49,6 +50,7 @@ class Crawler implements \Annatar\TheInterfaces\CurlInterface
      */
     public function execute() {
         $this->result = curl_exec($this->curl);
+
     }
 
     /**

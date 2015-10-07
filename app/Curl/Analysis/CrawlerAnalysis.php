@@ -71,11 +71,7 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setBio() {
         preg_match($this->regexs['bio'], $this->data, $bio);
-        if($bio) {
-            $this->afterAnalysis['bio'] = $bio[1];
-        }else{
-            $this->afterAnalysis['bio'] = '';
-        }
+        $this->afterAnalysis['bio'] = $bio ? $bio[1] : '';
     }
 
     /**
@@ -83,11 +79,8 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setLocation() {
         preg_match($this->regexs['location'], $this->data, $location);
-        if($location) {
-            $this->afterAnalysis['location'] = $location[1];
-        }else {
-            $this->afterAnalysis['location'] = '';
-        }
+
+        $this->afterAnalysis['location'] = $location ? $location[1] : '';
 
     }
 
@@ -96,7 +89,7 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setBusiness() {
         preg_match($this->regexs['business'], $this->data, $business);
-        $this->afterAnalysis['business'] = $business[1];
+        $this->afterAnalysis['business'] = $business ? $business[1] : '';
     }
 
     /**
@@ -104,7 +97,7 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setGender() {
         preg_match($this->regexs['gender'], $this->data, $gender);
-        $this->afterAnalysis['gender'] = $gender[1];
+        $this->afterAnalysis['gender'] =$gender ? $gender[1] : 'male';
     }
 
     /**
@@ -112,11 +105,8 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setEducation() {
         preg_match($this->regexs['education'], $this->data, $education);
-        if($education) {
-            $this->afterAnalysis['education'] = $education[1];
-        }else{
-            $this->afterAnalysis['education'] = '';
-        }
+
+        $this->afterAnalysis['education'] = $education ? $education[1] : '';
     }
 
     /**
@@ -124,12 +114,8 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setEducation_extra() {
         preg_match($this->regexs['education_extra'], $this->data, $education_extra);
-        if($education_extra) {
-            $this->afterAnalysis['education_extra'] = $education_extra[1];
-        }else {
-            $this->afterAnalysis['education_extra'] = '';
-        }
 
+        $this->afterAnalysis['education_extra'] = $education_extra ? $education_extra[1] : '';
     }
 
     /**
@@ -137,11 +123,7 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setContent() {
         preg_match($this->regexs['content'], $this->data, $content);
-        if($content) {
-            $this->afterAnalysis['content'] = $content[1];
-        }else{
-            $this->afterAnalysis['content'] = '';
-        }
+            $this->afterAnalysis['content'] = $content ? $content[1] : 0;
 
     }
 
@@ -150,7 +132,7 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setAgrees() {
         preg_match($this->regexs['agrees'], $this->data, $agrees);
-        $this->afterAnalysis['agrees'] = $agrees[1];
+        $this->afterAnalysis['agrees'] = $agrees ? $agrees[1] : 0;
     }
 
     /**
@@ -158,7 +140,7 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setThanks() {
         preg_match($this->regexs['thanks'], $this->data, $thanks);
-        $this->afterAnalysis['thanks'] = $thanks[1];
+        $this->afterAnalysis['thanks'] = $thanks ? $thanks[1] : 0;
     }
 
     /**

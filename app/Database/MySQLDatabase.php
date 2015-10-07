@@ -77,17 +77,30 @@ class MySQLDatabase implements DatabaseInterface
      * @param $params
      * @return $this
      */
-    public function execute($params) {
+    public function execute($params = null) {
 
-        Helpers::dd($params);
-        $success = $this->readied->execute($params);
-        if($success) {
-            return $this;
-        }else {
-            $errorInfo = $this->readied->errorInfo();
-            throw new \Exception($errorInfo[2]);
+        try{
+            if(is_null($params)){
+                $this->readied->execute();
+            }else{
+                $this->readied->execute($params);
+            }
+        }catch (\PDOException $e) {
+
+            throw new \PDOException($e->errorInfo);
         }
+        if ( $this->instance->lastInsertId() == 0 ){
+            $err = $this->instance->errorInfo();
+            // 需要添加日志记录
+//            var_dump($this->readied->errorInfo());
+//            var_dump($err);
 
+        }
+    }
+
+    public function bind($index, $val, $type) {
+
+        $this->readied->bindParam($index, $val, $type);
     }
 
     /**

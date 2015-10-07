@@ -37,7 +37,7 @@ class DetailInfoGet extends Controller
             if($this->redis->llen('usernames')) {
                 Crawler::setCrawlerUrl($this->redis->lpop('usernames'));
                 $this->runGetDetailsCrawler();
-                static::$count++;
+                static::$count += 1;
             }else{
                 $this->getUsernames(static::$count * $this->size);
             }
@@ -60,6 +60,7 @@ class DetailInfoGet extends Controller
         // 预处理存储数据
         $tm->store('INSERT INTO informations(username, nickname, bio, location, business, gender, education, education_extra, content, agrees, thanks, blue_stars, following, followers) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         // 存
+
         $tm->store($this->dataArray);
 
     }
