@@ -62,6 +62,10 @@ class Crawler implements \Annatar\TheInterfaces\CurlInterface
         return $this->result;
     }
 
+    public function __destruct() {
+        curl_close($this->curl);
+    }
+
 
 
 }

@@ -2,7 +2,6 @@
 
 define('DIR', __DIR__ . '/');
 
-echo DIR;
 
 require 'vendor/autoload.php';
 /**
@@ -13,4 +12,4 @@ require 'vendor/autoload.php';
  */
 
 //Annatar\Run::getDetail();
-//Annatar\Run::getUsers();
+Annatar\Run::getUsers();

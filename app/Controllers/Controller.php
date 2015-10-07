@@ -63,6 +63,16 @@ class Controller
         $size = Crawler::getMaxLimit();
         $this->redis->set('limitSize', $size);
 
+        // 从上次存储的地方恢复当前运行的次数和id
+//        $configs = $this->getLastTimesAndId();
+//
+//        $id = $configs ? $configs[1] : 0;
+//
+//        static::$count = $configs ? $configs[0] : 0;
+
+        // 初始化数据
+        $this->getUsernames(0);
+
     }
 
     protected function getSize() {
