@@ -28,6 +28,12 @@ class StoreDetails extends Store
         }
     }
 
+    /**
+     * 暂时无用
+     *
+     * @param array $data
+     * @param array $type
+     */
     public function bind(array $data, array $type) {
         $i = 1;
         foreach ($data as $val) {
@@ -53,5 +59,6 @@ class StoreDetails extends Store
             array_push($tmp, $v);
         }
         $this->db->execute($tmp);
+
     }
 }

@@ -1,5 +1,6 @@
 <?php
 namespace Annatar\Factory;
+use Annatar\Config\FileConfigFromCache;
 use Annatar\Controllers\DetailInfoGet;
 use Annatar\Controllers\UsersGet;
 use Annatar\Curl\Analysis\CrawlerAnalysis;
@@ -122,6 +123,16 @@ class Boot
     static public function detailInfoGetController() {
 
         return new DetailInfoGet();
+    }
+
+    /**
+     * 获取当前次数和保存什么的就靠你了！
+     *
+     * @param $file
+     * @return FileConfigFromCache
+     */
+    static public function fileCache($file) {
+        return new FileConfigFromCache($file);
     }
 
 }

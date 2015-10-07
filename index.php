@@ -1,4 +1,9 @@
 <?php
+
+define('DIR', __DIR__ . '/');
+
+echo DIR;
+
 require 'vendor/autoload.php';
 /**
  * Created by PhpStorm.
@@ -7,5 +12,5 @@ require 'vendor/autoload.php';
  * Time: 22:17
  */
 
-Annatar\Run::getDetail();
+//Annatar\Run::getDetail();
 //Annatar\Run::getUsers();

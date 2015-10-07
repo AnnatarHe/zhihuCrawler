@@ -7,6 +7,7 @@
  */
 
 namespace Annatar\Controllers\ControllersTraits;
+use Annatar\Factory\Boot;
 use Annatar\Helpers\Helpers;
 
 trait CheckDataFromRedis
@@ -33,5 +34,12 @@ trait CheckDataFromRedis
         }
 
         $this->redis->rpush('usernames', $tmp_array);
+    }
+
+    protected function getLastTimesAndId() {
+        $times = Boot::fileCache('lastTimes.txt');
+
+        return $times->getConfig();
+
     }
 }

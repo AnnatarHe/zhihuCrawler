@@ -25,7 +25,15 @@ class DetailInfoGet extends Controller
 
         parent::init();
 
-        $this->getUsernames(0);
+        // 从上次存储的地方恢复当前运行的次数和id
+        $configs = $this->getLastTimesAndId();
+
+        $id = $configs ? $configs[1] : 0;
+
+        static::$count = $configs ? $configs[0] : 0;
+
+        // 初始化数据
+        $this->getUsernames($id);
     }
 
     public function getDetails() {
@@ -62,6 +70,8 @@ class DetailInfoGet extends Controller
         // 存
 
         $tm->store($this->dataArray);
+
+        $tm->saveConfig(static::$count, $this->dataArray['id']);
 
     }
 }

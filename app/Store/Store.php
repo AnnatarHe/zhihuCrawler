@@ -23,6 +23,8 @@ class Store
      */
     protected $stat = null;
 
+    protected $eventAfterStore = ['saveConfig'];
+
     /**
      * 预处理
      *
@@ -31,4 +33,20 @@ class Store
     protected function ready($query) {
         $this->db->ready($query);
     }
+
+    public function addEventAfterStore($event) {
+
+        array_push($this->eventAfterStore, $event);
+    }
+
+    public function saveConfig($times, $id) {
+
+        $fileSave = Boot::fileCache('lastTimes.txt');
+
+        $fileSave->saveConfig($times, $id);
+
+        unset($fileSave);
+    }
+
+
 }
