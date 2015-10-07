@@ -20,10 +20,9 @@ class Crawler implements \Annatar\TheInterfaces\CurlInterface
     // 结果集
     private $result = '';
 
-
     /**
      *
-     * 初始化，载入url和cookies，
+     * 初始化，载入url和cookies
      * 并设置无头信息
      *
      * @param $url

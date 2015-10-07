@@ -63,13 +63,6 @@ class Controller
         $size = Crawler::getMaxLimit();
         $this->redis->set('limitSize', $size);
 
-        // 从上次存储的地方恢复当前运行的次数和id
-//        $configs = $this->getLastTimesAndId();
-//
-//        $id = $configs ? $configs[1] : 0;
-//
-//        static::$count = $configs ? $configs[0] : 0;
-
         // 初始化数据
         $this->getUsernames(0);
 
@@ -79,5 +72,27 @@ class Controller
 
         $this->endCounts = Crawler::getTimes();
         $this->size = $this->redis->get('limitSize');
+    }
+
+    protected function run($urlMethod, $runMethod) {
+
+
+        $this->getSize();
+        // 从redis拿出数据，并定义url，随后开始爬行逻辑
+        while(static::$count < $this->endCounts) {
+
+            if($len = $this->redis->llen('usernames')) {
+
+                for($i = 0; $i < $len; $i++) {
+
+                    Crawler::$urlMethod($this->redis->lpop('usernames'));
+                    $this->$runMethod();
+                }
+                static::$count += 1;
+            }else{
+                $this->getUsernames(static::$count * $this->size);
+            }
+        }
+
     }
 }

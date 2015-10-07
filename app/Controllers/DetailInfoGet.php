@@ -27,21 +27,12 @@ class DetailInfoGet extends Controller
 
     public function getDetails() {
 
-        $this->getSize();
+        $this->run('setAddUsersUrl', 'runGetDetailsCrawler');
 
-        // 从redis拿出数据，并定义url，随后开始爬行逻辑
-        while(static::$count < $this->endCounts) {
-            if($this->redis->llen('usernames')) {
-                Crawler::setCrawlerUrl($this->redis->lpop('usernames'));
-                $this->runGetDetailsCrawler();
-                static::$count += 1;
-            }else{
-                $this->getUsernames(static::$count * $this->size);
-            }
-        }
+
     }
 
-    function runGetDetailsCrawler() {
+    protected function runGetDetailsCrawler() {
         $crawler = new MainCrawl();
         $crawler->getData();
         $this->dataArray = $crawler->analysisCrawler();
@@ -55,12 +46,11 @@ class DetailInfoGet extends Controller
         $tm = Boot::detailsStore();
 
         // 预处理存储数据
-        $tm->store('INSERT INTO informations(username, nickname, bio, location, business, gender, education, education_extra, content, agrees, thanks, blue_stars, following, followers) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $tm->store('INSERT IGNORE INTO informations(username, nickname, bio, location, business, gender, education, education_extra, content, agrees, thanks, blue_stars, following, followers) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         // 存
 
         $tm->store($this->dataArray);
 
-        $tm->saveConfig(static::$count, $this->dataArray['id']);
 
     }
 }

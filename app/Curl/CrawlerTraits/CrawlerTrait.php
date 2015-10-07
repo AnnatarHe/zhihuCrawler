@@ -21,22 +21,25 @@ trait CrawlerTrait
     /**
      * 设置代理（模仿浏览器）
      */
-    protected function setAgant() {
-        curl_setopt($this->curl, CURLOPT_USERAGENT, $this->agent);
+    protected function setAgant($resource = null) {
+        $resource = is_null($resource) ? $this->curl : $resource;
+        curl_setopt($resource, CURLOPT_USERAGENT, $this->agent);
     }
 
     /**
      * 设置cookies
      */
-    protected function setCookies() {
-        curl_setopt($this->curl, CURLOPT_COOKIE, $this->cookies);
+    protected function setCookies($resource = null) {
+        $resource = is_null($resource) ? $this->curl : $resource;
+        curl_setopt($resource, CURLOPT_COOKIE, $this->cookies);
     }
 
     /**
      * 设置返回类型
      */
-    protected function returnTransfer() {
-        curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($this->curl, CURLOPT_FOLLOWLOCATION, 1);
+    protected function returnTransfer($resource = null) {
+        $resource = is_null($resource) ? $this->curl : $resource;
+        curl_setopt($resource, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($resource, CURLOPT_FOLLOWLOCATION, 1);
     }
 }

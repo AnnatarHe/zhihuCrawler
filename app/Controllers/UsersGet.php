@@ -38,23 +38,8 @@ class UsersGet extends Controller
      */
     public function addUsers() {
 
-        $this->getSize();
+        $this->run('setCrawlerUrl', 'runGetDetailsCrawler');
 
-        // 从redis拿出数据，并定义url，随后开始爬行逻辑
-        while(static::$count < $this->endCounts) {
-
-            if($this->redis->llen('usernames')) {
-
-                Crawler::setAddUsersUrl($this->redis->lpop('usernames'));
-                $this->runUsersCrawler();
-                static::$count++;
-
-            }else{
-
-                $this->getUsernames(static::$count * $this->size);
-            }
-        }
-        return;
     }
 
     /**
@@ -77,7 +62,5 @@ class UsersGet extends Controller
         $tm->store('INSERT IGNORE INTO users(username, createAt) VALUES(?, ?)');
         // 存
         $tm->store($this->dataArray);
-
-//        $tm->saveConfig(static::$count, $this->dataArray['id']);
     }
 }

@@ -6,7 +6,6 @@ use Annatar\Factory\Boot;
 class Run
 {
     static public function getUsers() {
-//        Boot::usersGetController();
         Boot::usersGetController()->addUsers();
     }
 
