@@ -9,6 +9,7 @@
 namespace Annatar\Curl\Analysis;
 use Annatar\TheInterfaces\AnalysisInterface;
 use Annatar\Curl\CrawlerTraits\AddUsersTrait;
+use Annatar\Helpers\Helpers;
 
 class UserFollowersAnalysis implements AnalysisInterface
 {
@@ -28,6 +29,7 @@ class UserFollowersAnalysis implements AnalysisInterface
     public function analysis($data) {
 
         $this->data = $data;
+
 
         $this->getFollowers();
         return $this->afterAnalysis;
@@ -51,7 +53,6 @@ class UserFollowersAnalysis implements AnalysisInterface
 
             array_push($tmp_after_analysis, $n);
         }, $followers);
-
         return $this->extra($tmp_after_analysis);
 
     }

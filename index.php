@@ -11,5 +11,5 @@ require 'vendor/autoload.php';
  * Time: 22:17
  */
 
-Annatar\Run::getDetail();
-//Annatar\Run::getUsers();
+//Annatar\Run::getDetail();
+Annatar\Run::getUsers();

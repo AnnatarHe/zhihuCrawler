@@ -38,14 +38,14 @@ class UsersGet extends Controller
      */
     public function addUsers() {
 
-        $this->run('setCrawlerUrl', 'runGetDetailsCrawler');
+        $this->run('setAddUsersUrl', 'runUsersCrawler');
 
     }
 
     /**
      * 私有方法主爬虫
      */
-    final private function runUsersCrawler() {
+    final protected function runUsersCrawler() {
 
         $crawler = new MainCrawl();
         $crawler->getData();
@@ -60,6 +60,7 @@ class UsersGet extends Controller
         $tm = Boot::userStore();
         // 预处理存储数据
         $tm->store('INSERT IGNORE INTO users(username, createAt) VALUES(?, ?)');
+
         // 存
         $tm->store($this->dataArray);
     }
