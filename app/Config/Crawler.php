@@ -19,11 +19,11 @@ class Crawler
 {
     static private $crawler = [
         // 每次从数据库拿出多少数据
-        'maxCounts' => 1000,
+        'maxCounts' => 1,
         // 拉多少次数据
-        'times' => 600,
+        'times' => 2,
         'url' => 'http://www.zhihu.com/people/AnnatarHe/about',
-        'cookies' => '_za=a6876498-c244-4e37-bfa1-56fe753b0ded; _ga=GA1.2.2053837710.1442629759; q_c1=8c45d37eb29e4b4bb738c631a86df1d6|1443831855000|1441199776000; _xsrf=0393f8aec5f5b3252e807d764b7a9c1c; cap_id="MTJhNzY3MWY4NzYwNGYxOTlhZTdhODk2OGU2ZjhjYjY=|1446300577|8c49b3da12e0d5cc314b94529309b070d5278837"; unlock_ticket="QUJDTVh2Nmc3d2dYQUFBQVlRSlZUYkRTTkZaZloxdERZVEI1eThHcV82cEZSVE4yUV96Qmh3PT0=|1446300584|e9bb52ac46f96cb24e4550e1aeccc7f4c8a9023f"; z_c0="QUJDTVh2Nmc3d2dYQUFBQVlRSlZUZUJZWEZiWTVRWWFvaU9pS29SbmZJTzdWN01YMUN2RTFnPT0=|1446300640|0d871bd151eb29785a8160e3eb6c7d03fa5578a8"; __utmt=1; __utma=51854390.2053837710.1442629759.1446300783.1446300783.1; __utmb=51854390.70.9.1446301005230; __utmc=51854390; __utmz=51854390.1446300783.1.1.utmcsr=zhihu.com|utmccn=(referral)|utmcmd=referral|utmcct=/; __utmv=51854390.100-1|2=registration_date=20151031=1^3=entry_date=20150902=1'
+        'cookies' => '__utma=51854390.712732287.1442674748.1446442835.1446904422.37; __utmz=51854390.1446356569.33.5.utmcsr=zhihu.com|utmccn=(referral)|utmcmd=referral|utmcct=/; __utmv=51854390.100-1|2=registration_date=20151031=1^3=entry_date=20150921=1; q_c1=181dc84d7b914fd2b114c87811bc7ad7|1445701408000|1442810608000; cap_id=ZDRlN2U2YWMwZjkxNGZmMWEzZjIwYWViZjNlYzY0MjU=|1446300158|1c9a6f6ac6e34abb454fb854347feac6e8417d75; z_c0=QUJDTVh2Nmc3d2dYQUFBQVlRSlZUUTlYWEZhSU4wSkU1MVlCMXN2NW92YzY2UUVMUHNldklBPT0=|1446300175|4f0eed1b7579ff78506e45edeaa387f26b5444e1; __utmb=51854390.4.10.1446904422; __utmt=1; __utmc=51854390; _za=5b740e6d-15e2-46fb-95a8-bda99c181555; _xsrf=b0b42c7df2ae4f903558f968e2e2b4d3'
     ];
 
     static public function getCrawlerConfigs() {

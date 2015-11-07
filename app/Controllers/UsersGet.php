@@ -11,6 +11,7 @@ namespace Annatar\Controllers;
 use Annatar\Curl\MainCrawl;
 use Annatar\Config\Crawler;
 use Annatar\Factory\Boot;
+use Annatar\Helpers\Helpers;
 
 class UsersGet extends Controller
 {

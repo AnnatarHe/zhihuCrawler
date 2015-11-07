@@ -30,7 +30,6 @@ class UserFollowersAnalysis implements AnalysisInterface
 
         $this->data = $data;
 
-
         $this->getFollowers();
         return $this->afterAnalysis;
     }
@@ -49,10 +48,14 @@ class UserFollowersAnalysis implements AnalysisInterface
 
         array_shift($followers);
 
-        array_map(function($n) use (&$tmp_after_analysis) {
+        if (is_null($followers)) {
+            throw new \Exception('maybe you should update your cookies');
+        }
 
+        array_map(function($n) use (&$tmp_after_analysis) {
             array_push($tmp_after_analysis, $n);
         }, $followers);
+
         return $this->extra($tmp_after_analysis);
 
     }
