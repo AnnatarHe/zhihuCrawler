@@ -48,13 +48,14 @@ class UserFollowersAnalysis implements AnalysisInterface
 
         array_shift($followers);
 
-        if (is_null($followers)) {
+        if (isset($followers)) {
             throw new \Exception('maybe you should update your cookies');
         }
 
         array_map(function($n) use (&$tmp_after_analysis) {
             array_push($tmp_after_analysis, $n);
         }, $followers);
+
 
         return $this->extra($tmp_after_analysis);
 

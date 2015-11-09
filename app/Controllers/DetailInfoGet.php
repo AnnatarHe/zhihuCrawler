@@ -28,14 +28,18 @@ class DetailInfoGet extends Controller
     public function getDetails() {
 
         $this->run('setAddUsersUrl', 'runGetDetailsCrawler');
-
-
     }
 
     protected function runGetDetailsCrawler() {
         $crawler = new MainCrawl();
         $crawler->getData();
         $this->dataArray = $crawler->analysisCrawler();
+
+        // 确认是否网络通畅
+        if($this->dataArray['username'] == null) {
+            echo 'bad http connect';
+            exit(1);
+        }
 
         $this->store();
     }
