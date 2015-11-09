@@ -18,6 +18,9 @@ class Run
         for ($i = 0; $i < 3; $i++) {
             (new \swoole_process(['Annatar\Run', 'getDetailAction']))->start();
         }
+
+        echo 'the process is running, please wait';
+
     }
 
     static public function getDetailAction()

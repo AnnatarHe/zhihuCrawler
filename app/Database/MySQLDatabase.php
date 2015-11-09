@@ -45,7 +45,7 @@ class MySQLDatabase implements DatabaseInterface
          */
         $config = DBConfig::getConfigs();
 
-        $this->dns = 'mysql:host=' . $config['host'] . ';dbname=' . $config['dbname'];
+        $this->dns = 'mysql:host=' . $config['host'] . ';dbname=' . $config['dbname'] . 'charset=utf8';
 
         try {
             static::$_instance = new \PDO($this->dns, $config['user'], $config['password']);
