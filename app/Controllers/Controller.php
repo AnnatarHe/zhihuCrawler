@@ -76,19 +76,18 @@ class Controller
 
     protected function run($urlMethod, $runMethod) {
 
-
         $this->getSize();
         // 从redis拿出数据，并定义url，随后开始爬行逻辑
         while(static::$count < $this->endCounts) {
 
-            if($len = $this->redis->llen('usernames')) {
+            if( $len = $this->redis->llen('usernames') ) {
 
                 for($i = 0; $i < $len; $i++) {
 
                     Crawler::$urlMethod($this->redis->lpop('usernames'));
                     $this->$runMethod();
                 }
-                static::$count += 1;
+                static::$count++;
             }else{
                 $this->getUsernames(static::$count * $this->size);
             }
