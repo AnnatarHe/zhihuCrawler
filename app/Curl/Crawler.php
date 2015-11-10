@@ -40,6 +40,7 @@ class Crawler implements \Annatar\TheInterfaces\CurlInterface
      */
     public function setSettings() {
         $this->setAgant();
+        $this->setHeaders();
         $this->setCookies();
         $this->returnTransfer();
     }
@@ -63,6 +64,7 @@ class Crawler implements \Annatar\TheInterfaces\CurlInterface
 
     public function __destruct() {
         curl_close($this->curl);
+        unset($this->result);
     }
 
 

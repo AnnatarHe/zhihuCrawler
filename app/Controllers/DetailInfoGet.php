@@ -27,7 +27,7 @@ class DetailInfoGet extends Controller
 
     public function getDetails() {
 
-        $this->run('setAddUsersUrl', 'runGetDetailsCrawler');
+        $this->run('setCrawlerUrl', 'runGetDetailsCrawler');
     }
 
     protected function runGetDetailsCrawler() {
@@ -38,10 +38,13 @@ class DetailInfoGet extends Controller
         // 确认是否网络通畅
         if($this->dataArray['username'] == null) {
             echo 'bad http connect';
-            exit(1);
+            return false;
         }
 
         $this->store();
+
+        // 释放内存
+        $crawler = null;
     }
 
     final private function store() {

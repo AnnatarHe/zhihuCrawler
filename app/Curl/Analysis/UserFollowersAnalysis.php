@@ -73,4 +73,11 @@ class UserFollowersAnalysis implements AnalysisInterface
 
         return $this->afterAnalysis;
     }
+
+    public function __destruct()
+    {
+        // TODO: Implement __destruct() method.
+        unset($this->data);
+        unset($this->afterAnalysis);
+    }
 }

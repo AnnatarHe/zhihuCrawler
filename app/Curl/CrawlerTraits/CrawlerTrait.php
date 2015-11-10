@@ -13,7 +13,7 @@ trait CrawlerTrait
 {
 
     // 浏览器代理
-    private $agent = 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.118 Safari/537.36';
+    private $agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.80 Safari/537.36';
 
     // cookies，通过配置文件来确认
     private $cookies = '';
@@ -32,6 +32,15 @@ trait CrawlerTrait
     protected function setCookies($resource = null) {
         $resource = is_null($resource) ? $this->curl : $resource;
         curl_setopt($resource, CURLOPT_COOKIE, $this->cookies);
+    }
+
+    protected function setHeaders($resource = null)
+    {
+        $resource = is_null($resource) ? $this->curl : $resource;
+        curl_setopt($resource, CURLOPT_HTTPHEADER, [
+            'Upgrade-Insecure-Requests' => 1,
+            'If-Modified-Since' => 'Tue, 10 Nov 2015 13:13:20 GMT'
+        ]);
     }
 
     /**

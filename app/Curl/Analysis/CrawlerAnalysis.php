@@ -7,6 +7,7 @@
  */
 
 namespace Annatar\Curl\Analysis;
+use Annatar\Helpers\Helpers;
 use Annatar\TheInterfaces\AnalysisInterface;
 use Annatar\Curl\CrawlerTraits\CrawlerRegexs;
 class CrawlerAnalysis implements AnalysisInterface
@@ -50,6 +51,8 @@ class CrawlerAnalysis implements AnalysisInterface
      * 粉丝和关注的人
      */
     protected function setFolleringAndFollers() {
+
+        Helpers::dd($this->data);
 
         preg_match_all($this->regexs['following_and_followers'], $this->data, $folleringAndFollers);
 
@@ -149,5 +152,12 @@ class CrawlerAnalysis implements AnalysisInterface
     protected function setBlue_stars() {
         preg_match($this->regexs['blue_stars'], $this->data, $blue_stars);
         $this->afterAnalysis['blue_stars'] = 0;
+    }
+
+    public function __destruct()
+    {
+        // TODO: Implement __destruct() method.
+        unset($this->afterAnalysis);
+        unset($this->data);
     }
 }

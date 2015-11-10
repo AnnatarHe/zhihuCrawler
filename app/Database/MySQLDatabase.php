@@ -118,8 +118,11 @@ class MySQLDatabase implements DatabaseInterface
         return $this->instance->query($query, \PDO::FETCH_ASSOC);
     }
 
-    public function __destruct() {
-
+    public function __destruct()
+    {
+        unset($this->result);
+        static::$_instance = null;
+        $this->instance = null;
     }
 
 }

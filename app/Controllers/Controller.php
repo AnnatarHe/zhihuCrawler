@@ -85,7 +85,9 @@ class Controller
                 for($i = 0; $i < $len; $i++) {
 
                     Crawler::$urlMethod($this->redis->lpop('usernames'));
-                    $this->$runMethod();
+                    if(! $this->$runMethod() ) {
+                        continue;
+                    }
                 }
                 static::$count++;
             }else{

@@ -16,8 +16,6 @@ class AddUsers
 
     static public $firstUsers =  ['AnnatarHe', 'liu-xue-20-67', 'SuneBear'];
 
-
-
     static public function addUsers() {
 
 

@@ -33,7 +33,6 @@ class MainCrawl
         // 初始化爬虫
         $configs = Crawler::getCrawlerConfigs();
         $this->crawler = Boot::curl($configs);
-
         // 初始化分析器
         $this->analysis = Boot::analysis();
     }
@@ -59,6 +58,7 @@ class MainCrawl
      */
     public function analysisCrawler() {
         $data = $this->data;
+        Helpers::dd($data);
         $this->afterAnalysis = $this->analysis->analysisCrawler($data);
         return $this->afterAnalysis;
     }
@@ -70,7 +70,14 @@ class MainCrawl
      */
     public function analysisUserFollers() {
         $data = $this->data;
+
         $this->afterAnalysis = $this->analysis->analysisUserFollowers($data);
         return $this->afterAnalysis;
+    }
+
+    public function __destruct()
+    {
+        // TODO: Implement __destruct() method.
+        $this->analysis = null;
     }
 }
