@@ -55,7 +55,6 @@ class CrawlerAnalysis implements AnalysisInterface
 
         preg_match_all($this->regexs['following_and_followers'], $this->data, $folleringAndFollers);
 
-
         $this->afterAnalysis['following'] = $folleringAndFollers[2][0];
         $this->afterAnalysis['followers'] = $folleringAndFollers[2][1];
     }
