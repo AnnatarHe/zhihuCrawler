@@ -58,7 +58,6 @@ class MainCrawl
      */
     public function analysisCrawler() {
         $data = $this->data;
-        Helpers::dd($data);
         $this->afterAnalysis = $this->analysis->analysisCrawler($data);
         return $this->afterAnalysis;
     }
