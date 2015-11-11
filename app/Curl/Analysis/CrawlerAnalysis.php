@@ -71,8 +71,8 @@ class CrawlerAnalysis implements AnalysisInterface
             var_dump($name);
         }
 
-        $this->afterAnalysis['nickname'] = $name[1];
-        $this->afterAnalysis['username'] = $name[3];
+        $this->afterAnalysis['username'] = $name[1];
+        $this->afterAnalysis['nickname'] = \Annatar\Config\Crawler::getCurrentUsername();
     }
 
     /**

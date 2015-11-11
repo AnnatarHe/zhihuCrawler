@@ -27,14 +27,12 @@
 
 如此循环，直到达到配置文件中要求。
 
-（不考虑性能问题，捂脸，逃）
-
 
 ## 问题
 
 #### 性能问题
 
-性能木有问题了，swoole多线程走起
+性能问题大大的。只是服务器不太好。不敢上多线程了。
 
 #### 编码问题
 
@@ -46,10 +44,11 @@
 
 跑在了阿里云的学生机上，好棒
 
-
 ## Todo
 
-暂时没什么目标了
+* 解耦
+* 日志
+* 更好的错误处理
 
 ## Usage
 
@@ -62,7 +61,17 @@ https://github.com/AnnatarHe/zhihuCrawler.git
 
 3. 运行index.php
 ```bash
-php index.php
+php index.php&
 ```
 
 4. 不出意外的话。。。速度较慢:flushed:
+
+## 配置
+
+在index.php里有一个常量定义：
+```php
+define(DEBUG, true);
+```
+真正跑数据的时候关掉，就好了
+
+app\Config\里面有一些配置项，需要可以用

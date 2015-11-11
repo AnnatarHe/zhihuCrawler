@@ -18,8 +18,9 @@ namespace Annatar\Config;
 class Crawler
 {
     static private $crawler = [
+        'currentUsername' => '',
         // 每次从数据库拿出多少数据
-        'maxCounts' => 1,
+        'maxCounts' => 100,
         // 拉多少次数据
         'times' => 2,
         'url' => 'http://www.zhihu.com/people/mimiknowyourself',
@@ -32,6 +33,11 @@ class Crawler
 
     static public function setCrawlerUrl($username) {
         static::$crawler['url'] = 'http://www.zhihu.com/people/' . $username;
+        static::$crawler['currentUsername'] = $username;
+    }
+
+    static public function getCurrentUsername() {
+        return static::$crawler['currentUsername'];
     }
 
     static public function setAddUsersUrl($username) {

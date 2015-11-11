@@ -13,7 +13,7 @@ trait CrawlerRegexs
 {
     public $regexs = [
         // 英文昵称，以及中文
-        'name' => '/<a data-tip="p\$.\$(.+)" href="http:\/\/www\.zhihu\.com\/people\/.+" class="zg-link" (data-original_)?title="(.+)">/',
+        'name' => '/<span class="name">(.+)<\/span>/',
         // 说了什么
         'bio' => '/<span class="bio" title="(.*\s*)">.*\s*<\/span/',
         // 位置
