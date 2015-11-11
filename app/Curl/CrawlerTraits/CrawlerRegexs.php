@@ -33,7 +33,7 @@ trait CrawlerRegexs
         // 被感谢
         'thanks' => '/<span class="zm-profile-header-user-thanks"><span class="zm-profile-header-icon"><\/span><strong>(\d+)<\/strong>/',
         // 这个比较特殊，第一个匹配是（我所关注的人），第二个匹配时（被我关注的人），第三个匹配是（主页被多少人浏览）
-        'following_and_followers' => '/<span class="zg-gray-normal">(.*)<\/span><br>\n<strong>(\d+)<\/strong><label>/',
+        'following_and_followers' => '/<span class="zg-gray-normal">(.*)<\/span><br \/>\n<strong>(\d+)<\/strong><label>/',
         // 友善度
         'blue_stars' => '/<span class="blue-stars" style="width: (\d+)\.\d+%"><\//'
     ];
