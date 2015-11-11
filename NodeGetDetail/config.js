@@ -12,7 +12,8 @@ const MYSQL_CONFIG = {
 };
 
 const CRAWLER_CONFIG = {
-    limit: 2
+    limit: 2,
+    times: 2
 };
 
 let detailUrl = '/people/excited-vczh';
