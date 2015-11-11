@@ -43,6 +43,7 @@ class CrawlerAnalysis implements AnalysisInterface
         $this->setThanks();
         $this->setBlue_stars();
         $this->setFolleringAndFollers();
+
         return $this->afterAnalysis;
     }
 
@@ -52,9 +53,8 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setFolleringAndFollers() {
 
-        Helpers::dd($this->data);
-
         preg_match_all($this->regexs['following_and_followers'], $this->data, $folleringAndFollers);
+
 
         $this->afterAnalysis['following'] = $folleringAndFollers[2][0];
         $this->afterAnalysis['followers'] = $folleringAndFollers[2][1];
@@ -65,8 +65,14 @@ class CrawlerAnalysis implements AnalysisInterface
      */
     protected function setName() {
         preg_match($this->regexs['name'], $this->data, $name);
+
+        if (DEBUG == true) {
+            echo 'the name regex is ';
+            var_dump($name);
+        }
+
         $this->afterAnalysis['nickname'] = $name[1];
-        $this->afterAnalysis['username'] = $name[2];
+        $this->afterAnalysis['username'] = $name[3];
     }
 
     /**

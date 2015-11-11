@@ -32,6 +32,9 @@ class Crawler implements \Annatar\TheInterfaces\CurlInterface
 
         $this->cookies = $cookies;
         $this->curl = curl_init($url);
+        if (DEBUG == true) {
+            var_dump($url);
+        }
         curl_setopt($this->curl, CURLOPT_HEADER, 0);
     }
 

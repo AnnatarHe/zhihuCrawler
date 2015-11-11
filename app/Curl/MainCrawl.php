@@ -57,8 +57,13 @@ class MainCrawl
      * @return array
      */
     public function analysisCrawler() {
-        $data = $this->data;
-        $this->afterAnalysis = $this->analysis->analysisCrawler($data);
+
+        // 404 跳过
+        if (preg_match('/<strong>>你似乎来到了没有知识存在的荒原...<\/strong>/', $this->data)) {
+            return false;
+        }
+
+        $this->afterAnalysis = $this->analysis->analysisCrawler($this->data);
         return $this->afterAnalysis;
     }
 

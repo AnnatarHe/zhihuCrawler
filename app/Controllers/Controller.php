@@ -63,8 +63,16 @@ class Controller
         $size = Crawler::getMaxLimit();
         $this->redis->set('limitSize', $size);
 
-        // 初始化数据
-        $this->getUsernames(0);
+        if (DEBUG == true) {
+            echo 'the usernames at redis :';
+            var_dump($this->redis->llen('usernames'));
+        }
+
+        if ( !$this->redis->llen('usernames') ) {
+            // 初始化数据
+            $this->getUsernames(0);
+        }
+
 
     }
 

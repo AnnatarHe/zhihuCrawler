@@ -1,7 +1,7 @@
 <?php
 
 define('DIR', __DIR__ . '/');
-
+define('DEBUG', true);
 
 require 'vendor/autoload.php';
 /**

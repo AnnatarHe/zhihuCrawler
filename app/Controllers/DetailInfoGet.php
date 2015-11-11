@@ -19,21 +19,32 @@ class DetailInfoGet extends Controller
 
     use CheckDataFromRedis;
 
-    public function __construct() {
-
+    public function __construct()
+    {
         parent::init();
-
     }
 
-    public function getDetails() {
+    public function getDetails()
+    {
 
         $this->run('setCrawlerUrl', 'runGetDetailsCrawler');
     }
 
-    protected function runGetDetailsCrawler() {
+    protected function runGetDetailsCrawler()
+    {
         $crawler = new MainCrawl();
         $crawler->getData();
         $this->dataArray = $crawler->analysisCrawler();
+
+        if (DEBUG == true) {
+            echo 'the result is: ';
+            var_dump($this->dataArray);
+        }
+
+        if (! $this->dataArray) {
+            echo '404 not found';
+            return false;
+        }
 
         // 确认是否网络通畅
         if($this->dataArray['username'] == null) {
