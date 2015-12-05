@@ -28,7 +28,7 @@ class Crawler implements \Annatar\TheInterfaces\CurlInterface
      * @param $url
      * @param $cookies
      */
-    public function __construct($url, $cookies) {
+    public function __construct(string $url,string $cookies) {
 
         $this->cookies = $cookies;
         $this->curl = curl_init($url);
@@ -41,7 +41,7 @@ class Crawler implements \Annatar\TheInterfaces\CurlInterface
     /**
      * 设置几个必需的设置
      */
-    public function setSettings() {
+    public function setSettings(): null {
         $this->setAgant();
         $this->setHeaders();
         $this->setCookies();
@@ -51,17 +51,16 @@ class Crawler implements \Annatar\TheInterfaces\CurlInterface
     /**
      * 执行curl操作
      */
-    public function execute() {
+    public function execute(): null {
         $this->result = curl_exec($this->curl);
 
     }
 
     /**
      * 获取结果集
-     *
      * @return string
      */
-    public function getResult() {
+    public function getResult(): string {
         return $this->result;
     }
 
@@ -69,7 +68,5 @@ class Crawler implements \Annatar\TheInterfaces\CurlInterface
         curl_close($this->curl);
         unset($this->result);
     }
-
-
 
 }

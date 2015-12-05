@@ -26,7 +26,7 @@ class UserFollowersAnalysis implements AnalysisInterface
      * @param $data
      * @return array
      */
-    public function analysis($data) {
+    public function analysis(string $data): array {
 
         $this->data = $data;
 
@@ -66,7 +66,7 @@ class UserFollowersAnalysis implements AnalysisInterface
      * @param array $data
      * @return array
      */
-    protected function extra(array $data) {
+    protected function extra(array $data): array {
         foreach($data[0] as $v) {
             $this->afterAnalysis[] = $v;
         }

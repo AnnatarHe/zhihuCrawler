@@ -26,7 +26,7 @@ class Boot
      * @param array $configs
      * @return Crawler
      */
-    static public function curl(array $configs) {
+    static public function curl(array $configs): Crawler {
 
         $url = $configs['url'];
         $cookies = $configs['cookies'];
@@ -38,7 +38,7 @@ class Boot
      *
      * @return AnalysisData
      */
-    static public function analysis() {
+    static public function analysis(): AnalysisData {
         return new AnalysisData();
     }
 
@@ -47,7 +47,7 @@ class Boot
      *
      * @return CrawlerAnalysis
      */
-    static public function crawlerAnalysis() {
+    static public function crawlerAnalysis(): CrawlerAnalysis {
         return new CrawlerAnalysis();
     }
 
@@ -56,7 +56,7 @@ class Boot
      *
      * @return UserFollowersAnalysis
      */
-    static public function userFollowersAnalysis() {
+    static public function userFollowersAnalysis(): UserFollowersAnalysis {
         return new UserFollowersAnalysis();
     }
 
@@ -66,7 +66,7 @@ class Boot
      *
      * @return MySQLDatabase|\PDO
      */
-    static public function DB() {
+    static public function DB(): \PDO {
         return MySQLDatabase::getInstence();
     }
 
@@ -76,7 +76,7 @@ class Boot
      *
      * @return \Annatar\Store\StoreUsers
      */
-    static public function userStore() {
+    static public function userStore(): StoreUsers {
         return StoreUsers::getInstence();
     }
 
@@ -85,7 +85,7 @@ class Boot
      *
      * @return \Annatar\Store\StoreDetails
      */
-    static public function detailsStore() {
+    static public function detailsStore(): StoreDetails {
         return StoreDetails::getInstence();
     }
 
@@ -99,7 +99,7 @@ class Boot
      *
      * @return \Predis\Client
      */
-    static public function redis() {
+    static public function redis(): \Predis\Client {
         if(empty(static::$redis)){
             static::$redis = new \Predis\Client();
         }
@@ -111,7 +111,7 @@ class Boot
      *
      * @return UsersGet
      */
-    static public function usersGetController() {
+    static public function usersGetController(): UsersGet {
         return new UsersGet();
     }
 
@@ -120,7 +120,7 @@ class Boot
      *
      * @return DetailInfoGet
      */
-    static public function detailInfoGetController() {
+    static public function detailInfoGetController(): DetailInfoGet {
 
         return new DetailInfoGet();
     }
@@ -131,7 +131,7 @@ class Boot
      * @param $file
      * @return FileConfigFromCache
      */
-    static public function fileCache($file) {
+    static public function fileCache($file): FileConfigFromCache {
         return new FileConfigFromCache($file);
     }
 

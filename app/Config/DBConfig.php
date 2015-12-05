@@ -18,7 +18,7 @@ class DBConfig
         'password' => 'adminhele',
         'dbname' => 'zhihu'
     ];
-    static function getConfigs() {
+    static function getConfigs(): array {
         return static::$configs;
     }
 }

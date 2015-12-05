@@ -42,7 +42,7 @@ class MainCrawl
      *
      * 先是添加一些设置，然后执行，之后获取
      */
-    public function getData() {
+    public function getData(): null {
 
         $this->crawler->setSettings();
         $this->crawler->execute();
@@ -56,7 +56,7 @@ class MainCrawl
      *
      * @return array
      */
-    public function analysisCrawler() {
+    public function analysisCrawler(): array {
 
         // 404 跳过
         if (preg_match('/<strong>>你似乎来到了没有知识存在的荒原...<\/strong>/', $this->data)) {
@@ -72,7 +72,7 @@ class MainCrawl
      *
      * @return array
      */
-    public function analysisUserFollers() {
+    public function analysisUserFollers(): array {
         $data = $this->data;
 
         $this->afterAnalysis = $this->analysis->analysisUserFollowers($data);

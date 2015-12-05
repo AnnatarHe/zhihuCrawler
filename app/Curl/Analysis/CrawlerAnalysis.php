@@ -7,6 +7,7 @@
  */
 
 namespace Annatar\Curl\Analysis;
+use Annatar\Config\Crawler;
 use Annatar\Helpers\Helpers;
 use Annatar\TheInterfaces\AnalysisInterface;
 use Annatar\Curl\CrawlerTraits\CrawlerRegexs;
@@ -27,7 +28,7 @@ class CrawlerAnalysis implements AnalysisInterface
      * @param $data 爬到的数据
      * @return array 处理后的数据
      */
-    public function analysis($data) {
+    public function analysis(string $data): array {
 
         $this->data = $data;
 
@@ -51,7 +52,7 @@ class CrawlerAnalysis implements AnalysisInterface
     /**
      * 粉丝和关注的人
      */
-    protected function setFolleringAndFollers() {
+    protected function setFolleringAndFollers(): null {
 
         preg_match_all($this->regexs['following_and_followers'], $this->data, $folleringAndFollers);
 
@@ -71,7 +72,7 @@ class CrawlerAnalysis implements AnalysisInterface
         }
 
         $this->afterAnalysis['username'] = $name[1];
-        $this->afterAnalysis['nickname'] = \Annatar\Config\Crawler::getCurrentUsername();
+        $this->afterAnalysis['nickname'] = Crawler::getCurrentUsername();
     }
 
     /**

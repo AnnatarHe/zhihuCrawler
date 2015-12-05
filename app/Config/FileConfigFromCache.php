@@ -14,7 +14,7 @@ use Annatar\Database\FileDatabase;
 class FileConfigFromCache extends FileDatabase
 {
 
-    public function saveConfig($times, $id) {
+    public function saveConfig(int $times, int $id) {
 
         $content = 'currentTimes: ' . $times . '\n';
 

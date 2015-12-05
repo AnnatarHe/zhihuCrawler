@@ -5,7 +5,7 @@ use Annatar\Factory\Boot;
 
 class Run
 {
-    static public function getUsers()
+    static public function getUsers(): null
     {
         Boot::usersGetController()->addUsers();
     }
@@ -15,7 +15,7 @@ class Run
      *
      * 出了点儿问题，暂时还是走单线程吧。至少能拿到数据
      */
-    static public function getDetail()
+    static public function getDetail(): null
     {
 //        for ($i = 0; $i < 3; $i++) {
 //            (new \swoole_process(['Annatar\Run', 'getDetailAction']))->start();
@@ -26,7 +26,7 @@ class Run
 
     }
 
-    static public function getDetailAction()
+    static public function getDetailAction(): null
     {
         Boot::detailInfoGetController()->getDetails();
     }

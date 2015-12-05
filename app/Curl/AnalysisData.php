@@ -13,11 +13,11 @@ use Annatar\Factory\Boot;
 class AnalysisData
 {
 
-    public function analysisCrawler($data) {
+    public function analysisCrawler(string $data) {
         return Boot::crawlerAnalysis()->analysis($data);
     }
 
-    public function analysisUserFollowers($data) {
+    public function analysisUserFollowers(string $data) {
         return Boot::userFollowersAnalysis()->analysis($data);
     }
 
